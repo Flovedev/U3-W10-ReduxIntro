@@ -7,12 +7,22 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_FAVOURITE":
+    case "ADD_TO_FAVOURITES":
       return {
         ...state,
         favourites: {
-          ...state.favourite,
-          content: [...state.favourite.content, action.payload],
+          ...state.favourites,
+          content: [...state.favourites.content, action.payload],
+        },
+      };
+
+    case "REMOVE_FROM_FAVOURITES":
+      return {
+        ...state,
+        favourites: {
+          content: state.favourites.content.filter(
+            (e, i) => i !== action.payload
+          ),
         },
       };
 

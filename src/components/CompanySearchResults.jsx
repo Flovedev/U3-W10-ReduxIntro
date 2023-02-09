@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 const CompanySearchResults = () => {
   const [jobs, setJobs] = useState([]);
+
   const params = useParams();
 
   const baseEndpoint =
@@ -12,6 +13,7 @@ const CompanySearchResults = () => {
 
   useEffect(() => {
     getJobs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getJobs = async () => {
@@ -32,8 +34,8 @@ const CompanySearchResults = () => {
     <Container>
       <Row>
         <Col>
-          {jobs.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
+          {jobs.map((jobData, i) => (
+            <Job key={jobData._id} data={jobData} i={i} />
           ))}
         </Col>
       </Row>

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Job from "./Job";
 
 const MainSearch = () => {
@@ -32,8 +33,11 @@ const MainSearch = () => {
   return (
     <Container>
       <Row>
-        <Col xs={10} className="mx-auto my-3">
+        <Col xs={10} className="mx-auto my-3 d-flex justify-content-between">
           <h1>Remote Jobs Search</h1>
+          <Link to={"/favourites"}>
+            <Button variant="info">Favourites</Button>
+          </Link>
         </Col>
         <Col xs={10} className="mx-auto">
           <Form onSubmit={handleSubmit}>
@@ -46,8 +50,8 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
+          {jobs.map((jobData, i) => (
+            <Job key={jobData._id} data={jobData} i={i} />
           ))}
         </Col>
       </Row>
