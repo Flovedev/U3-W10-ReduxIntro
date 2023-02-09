@@ -33,7 +33,7 @@ const Job = ({ data, i }) => {
           onClick={() => {
             dispatch({
               type: "REMOVE_FROM_FAVOURITES",
-              payload: i,
+              payload: data,
             });
             setFavourite(false);
           }}
