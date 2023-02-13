@@ -1,9 +1,9 @@
 import { Row, Col, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToFavorites } from "../redux/actions";
 
-const Job = ({ data, i }) => {
+const Job = ({ data }) => {
   const dispatch = useDispatch();
 
   return (

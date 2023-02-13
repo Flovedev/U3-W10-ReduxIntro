@@ -22,7 +22,7 @@ const CompanySearchResults = () => {
         {search[0] ? (
           <Col>
             {search[0].map((jobData, i) => (
-              <Job key={jobData._id} data={jobData} i={i} />
+              <Job key={jobData._id} data={jobData} />
             ))}
           </Col>
         ) : (
