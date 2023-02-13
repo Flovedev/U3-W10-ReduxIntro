@@ -3,13 +3,12 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { addToFavorites, removeFromFavourites } from "../redux/actions";
 
 const Job = ({ data, i }) => {
-  let favourites = useSelector((state) => state.favourites.content);
+  // let favourites = useSelector((state) => state.content);
 
   const [favourite, setFavourite] = useState(false);
-
-  // console.log(data, favourites);
 
   const dispatch = useDispatch();
 
@@ -31,10 +30,7 @@ const Job = ({ data, i }) => {
         <Button
           variant="danger"
           onClick={() => {
-            dispatch({
-              type: "REMOVE_FROM_FAVOURITES",
-              payload: data,
-            });
+            dispatch(removeFromFavourites(data));
             setFavourite(false);
           }}
         >
@@ -44,10 +40,7 @@ const Job = ({ data, i }) => {
         <Button
           variant="success"
           onClick={() => {
-            dispatch({
-              type: "ADD_TO_FAVOURITES",
-              payload: data,
-            });
+            dispatch(addToFavorites(data));
             setFavourite(true);
           }}
         >
