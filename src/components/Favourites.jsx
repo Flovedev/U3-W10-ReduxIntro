@@ -5,7 +5,6 @@ import { removeFromFavourites } from "../redux/actions";
 
 const Favourites = () => {
   let favourites = useSelector((state) => state.favourite.content);
-  // console.log(favourites);
 
   const dispatch = useDispatch();
 

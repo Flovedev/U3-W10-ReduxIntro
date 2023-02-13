@@ -1,15 +1,9 @@
 import { Row, Col, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import { addToFavorites, removeFromFavourites } from "../redux/actions";
+import { addToFavorites } from "../redux/actions";
 
 const Job = ({ data, i }) => {
-  // let favourites = useSelector((state) => state.content);
-
-  const [favourite, setFavourite] = useState(false);
-
   const dispatch = useDispatch();
 
   return (
@@ -26,27 +20,14 @@ const Job = ({ data, i }) => {
         </a>
       </Col>
 
-      {favourite ? (
-        <Button
-          variant="danger"
-          onClick={() => {
-            dispatch(removeFromFavourites(data));
-            setFavourite(false);
-          }}
-        >
-          Remove from Favourites
-        </Button>
-      ) : (
-        <Button
-          variant="success"
-          onClick={() => {
-            dispatch(addToFavorites(data));
-            setFavourite(true);
-          }}
-        >
-          Add to Favourites
-        </Button>
-      )}
+      <Button
+        variant="success"
+        onClick={() => {
+          dispatch(addToFavorites(data));
+        }}
+      >
+        Add to Favourites
+      </Button>
 
       <Col xs={3}></Col>
     </Row>

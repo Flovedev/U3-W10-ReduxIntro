@@ -1,7 +1,8 @@
-import { GET_JOBS } from "../actions";
+import { GET_JOBS, GET_COMPANY_JOBS } from "../actions";
 
 const initialState = {
   jobs: [],
+  company: [],
 };
 
 const jobReducer = (state = initialState, action) => {
@@ -11,6 +12,13 @@ const jobReducer = (state = initialState, action) => {
         ...state,
         jobs: [...state.jobs, action.payload],
       };
+
+    case GET_COMPANY_JOBS:
+      return {
+        ...state,
+        company: [...state.company, action.payload],
+      };
+
     default:
       return state;
   }
