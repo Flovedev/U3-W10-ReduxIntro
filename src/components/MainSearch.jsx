@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Alert,
-  Spinner,
-} from "react-bootstrap";
+import { Container, Row, Col, Form, Alert, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getLoading, jobSearch } from "../redux/actions";
+import { setUsernameAction } from "../redux/actions";
 import Job from "./Job";
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const userName = useSelector((state) => state.user.name);
   let search = useSelector((state) => state.search.jobs);
   const applicationLoading = useSelector((state) => state.search.isLoading);
   const applicationError = useSelector((state) => state.search.isError);
@@ -34,9 +28,27 @@ const MainSearch = () => {
       <Row>
         <Col xs={10} className="mx-auto my-3 d-flex justify-content-between">
           <h1>Remote Jobs Search</h1>
-          <Link to={"/favourites"}>
-            <Button variant="info">Favourites</Button>
-          </Link>
+
+          {userName ? (
+            <p>Hello: {userName}!</p>
+          ) : (
+            <Form
+              onSubmit={(e) => {
+                e.preventDefault();
+                dispatch(setUsernameAction(inputValue));
+              }}
+            >
+              <Form.Group>
+                <Form.Control
+                  type="text"
+                  placeholder="Log in here..."
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  disabled={applicationError}
+                />
+              </Form.Group>
+            </Form>
+          )}
         </Col>
         <Col xs={10} className="mx-auto">
           <Form

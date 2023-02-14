@@ -35,7 +35,7 @@ const Job = ({ data, i }) => {
         <Button
           variant="danger"
           onClick={() => {
-            dispatch(removeFromFavourites(i));
+            dispatch(removeFromFavourites(data._id));
             setSelected(true);
           }}
         >

@@ -37,7 +37,7 @@ const Favourites = () => {
                     <Button
                       variant="danger"
                       onClick={() => {
-                        dispatch(removeFromFavourites(i));
+                        dispatch(removeFromFavourites(data._id));
                       }}
                     >
                       Delete from favourites

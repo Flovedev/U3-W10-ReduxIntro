@@ -4,6 +4,7 @@ export const GET_JOBS = "GET_JOBS";
 export const GET_COMPANY_JOBS = "GET_COMPANY_JOBS";
 export const GET_LOADING = "GET_LOADING";
 export const GET_ERROR = "GET_ERROR";
+export const SET_USERNAME = "SET_USERNAME";
 
 export const addToFavorites = (e) => {
   return {
@@ -44,6 +45,13 @@ export const getError = (e) => {
   return {
     type: GET_ERROR,
     payload: e,
+  };
+};
+
+export const setUsernameAction = (name) => {
+  return {
+    type: SET_USERNAME,
+    payload: name,
   };
 };
 
