@@ -6,12 +6,12 @@ import localStorage from "redux-persist/lib/storage";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 
 const persistConfig = {
-  store: localStorage,
+  storage: localStorage,
   key: "root",
   transform: [
     encryptTransform({
       // secretkey: process.env.REACT_APP_ENV_SECRET_KEY,
-      secretKey: "Flo_test",
+      secretKey: process.env.REACT_APP_ENV_SECRET_KEY,
     }),
   ],
 };
@@ -25,6 +25,12 @@ const persistedReducer = persistReducer(persistConfig, combinedReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+      // this shuts off the checking of non-serializable values in actions
+    });
+  },
 });
 
 const persistedStore = persistStore(store);
