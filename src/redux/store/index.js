@@ -2,8 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import favouriteReducer from "../reducers/favouriteReducer";
 import jobReducer from "../reducers/jobSearchReducer";
 import { persistStore, persistReducer } from "redux-persist";
-
-import localStorage from "redux-persist/es/storage";
+import localStorage from "redux-persist/lib/storage";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 
 const persistConfig = {
