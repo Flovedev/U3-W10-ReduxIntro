@@ -2,6 +2,8 @@ export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
 export const REMOVE_FROM_FAVOURITES = "REMOVE_FROM_FAVOURITES";
 export const GET_JOBS = "GET_JOBS";
 export const GET_COMPANY_JOBS = "GET_COMPANY_JOBS";
+export const GET_LOADING = "GET_LOADING";
+export const GET_ERROR = "GET_ERROR";
 
 export const addToFavorites = (e) => {
   return {
@@ -31,6 +33,20 @@ export const getCompanyJobs = (e) => {
   };
 };
 
+export const getLoading = (e) => {
+  return {
+    type: GET_LOADING,
+    payload: e,
+  };
+};
+
+export const getError = (e) => {
+  return {
+    type: GET_ERROR,
+    payload: e,
+  };
+};
+
 export const jobSearch = (query) => {
   const baseEndpoint =
     "https://strive-benchmark.herokuapp.com/api/jobs?search=";
@@ -41,11 +57,14 @@ export const jobSearch = (query) => {
       if (response.ok) {
         const { data } = await response.json();
         dispatch(getJobs(data));
+        dispatch(getLoading(false));
       } else {
-        alert("Error fetching results");
+        dispatch(getLoading(false));
+        dispatch(getError(true));
       }
     } catch (error) {
-      console.log(error);
+      dispatch(getLoading(false));
+      dispatch(getError(true));
     }
   };
 };
@@ -60,11 +79,14 @@ export const companyJobSearch = (e) => {
       if (response.ok) {
         const { data } = await response.json();
         dispatch(getCompanyJobs(data));
+        dispatch(getLoading(false));
       } else {
-        alert("Error fetching results");
+        dispatch(getLoading(false));
+        dispatch(getError(true));
       }
     } catch (error) {
-      console.log(error);
+      dispatch(getLoading(false));
+      dispatch(getError(true));
     }
   };
 };

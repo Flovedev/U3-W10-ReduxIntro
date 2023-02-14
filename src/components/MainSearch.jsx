@@ -1,18 +1,33 @@
-import { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Alert,
+  Spinner,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { jobSearch } from "../redux/actions";
+import { getLoading, jobSearch } from "../redux/actions";
 import Job from "./Job";
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
   let search = useSelector((state) => state.search.jobs);
+  const applicationLoading = useSelector((state) => state.search.isLoading);
+  const applicationError = useSelector((state) => state.search.isError);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setQuery(e.target.value);
   };
+
+  useEffect(() => {
+    dispatch(getLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container>
@@ -27,6 +42,7 @@ const MainSearch = () => {
           <Form
             onSubmit={(e) => {
               e.preventDefault();
+              dispatch(getLoading(true));
               dispatch(jobSearch(search));
             }}
           >
@@ -38,6 +54,15 @@ const MainSearch = () => {
             />
           </Form>
         </Col>
+        {applicationError && (
+          <Alert variant="danger" className="mr-2">
+            Something very bad happened with the search... 😨
+          </Alert>
+        )}
+        {applicationLoading && (
+          <Spinner className="mr-2" animation="border" variant="success" />
+        )}
+
         {search[0] ? (
           <Col xs={10} className="mx-auto mb-5">
             {search[0].map((jobData, i) => (
